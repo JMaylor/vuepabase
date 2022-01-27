@@ -15,7 +15,9 @@
   "dependencies": {
     "@headlessui/vue": "^1.4.3",
     "@iconify/iconify": "^2.1.0",
+    "@supabase/supabase-js": "^1.29.4",
     "@vueuse/core": "^7.4.1",
+    "pinia": "^2.0.10",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12"
   },

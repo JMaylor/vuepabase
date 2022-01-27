@@ -17,7 +17,7 @@ export default defineConfig({
     AutoImport({
       // targets to transform
       include: [/\.[tj]s?$/, /\.vue$/, /\.vue\?vue/],
-      imports: ["vue", "vue-router", "@vueuse/core"],
+      imports: ["vue", "vue-router", "@vueuse/core", "pinia"],
     }),
   ],
   resolve: {

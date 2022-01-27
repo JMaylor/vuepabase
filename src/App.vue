@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+import { supabase } from "@/services/supabase";
+
+provide("supabase", supabase);
+</script>
+
 <template>
-  <main><router-view /></main>
+  <main class="h-full p-8"><router-view /></main>
 </template>
