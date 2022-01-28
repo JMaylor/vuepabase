@@ -26,24 +26,24 @@ async function signIn() {
 }
 </script>
 <template>
-  <div class="flex flex-col p-8 gap-8 border rounded">
+  <div class="flex flex-col gap-8">
     <input
       type="email"
       v-model="credentials.email"
       placeholder="email"
-      class="p-2 rounded border"
+      class="rounded border p-2"
     />
     <input
       type="password"
       v-model="credentials.password"
       placeholder="password"
-      class="p-2 rounded border"
+      class="rounded border p-2"
     />
     <div class="flex justify-center gap-8">
-      <button class="bg-teal-700 text-white py-1 px-3 rounded" @click="signUp">
+      <button class="rounded bg-teal-700 py-1 px-3 text-white" @click="signUp">
         Sign Up
       </button>
-      <button class="bg-teal-700 text-white py-1 px-3 rounded" @click="signIn">
+      <button class="rounded bg-teal-700 py-1 px-3 text-white" @click="signIn">
         Sign In
       </button>
     </div>

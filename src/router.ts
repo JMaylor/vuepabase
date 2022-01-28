@@ -6,13 +6,25 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/auth",
-      name: "auth",
-      component: () => import("@/views/AuthView.vue"),
+      path: "/signin",
+      component: () => import("@/layouts/AuthLayout.vue"),
       meta: {
         requiresNoAuth: true,
       },
+      children: [
+        {
+          path: "/signin",
+          name: "signIn",
+          component: () => import("@/views/auth/SignIn.vue"),
+        },
+        {
+          path: "/signup",
+          name: "signUp",
+          component: () => import("@/views/auth/SignUp.vue"),
+        },
+      ],
     },
+
     {
       path: "/",
       name: "home",
@@ -28,15 +40,15 @@ const { supabase } = useAuthStore(pinia);
 supabase.auth.onAuthStateChange((event, session) => {
   console.log("SUPABASE AUTH STATE CHANGE");
   console.log(event, session);
-  if (event == 'SIGNED_IN') return router.push('/')
-  if (event == 'SIGNED_OUT') router.push('/auth')
+  if (event == "SIGNED_IN") return router.push("/");
+  if (event == "SIGNED_OUT") return router.push("/signin");
 });
 
 router.beforeEach((to, from) => {
   const { supabase } = useAuthStore();
   if (to.meta.requiresAuth && !supabase.auth.user()) {
     return {
-      path: "/auth",
+      path: "/signin",
       // save the location we were at to come back later
       query: { redirect: to.fullPath },
     };

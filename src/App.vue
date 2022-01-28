@@ -5,5 +5,15 @@ provide("supabase", supabase);
 </script>
 
 <template>
-  <main class="h-full p-8"><router-view /></main>
+  <router-view />
 </template>
+
+<style>
+html,
+body,
+#app {
+  height: 100%;
+  min-height: 100%;
+  @apply bg-slate-100;
+}
+</style>
