@@ -1,39 +1,71 @@
 <script lang="ts" setup>
 import { useAuthStore } from "@/stores/auth";
+import { Ref } from "vue";
+import { UserCredentials } from "@supabase/supabase-js";
 
-const credentials = ref({
+const credentials: Ref<UserCredentials> = ref({
   email: "",
   password: "",
 });
 
 const router = useRouter();
 
+const loading = ref(false);
+
 async function onSubmit() {
-  console.log("submitting...");
+  loading.value = true;
 
   const { supabase } = useAuthStore();
-  const { user, session, error } = await supabase.auth.signUp(
-    credentials.value
-  );
-  console.log(user, session, error);
-
-  if (user) {
-    router.push("/");
-  } else {
-    if (error) alert(error.message);
+  const { user, error } = await supabase.auth.signUp(credentials.value);
+  if (user) router.push("/");
+  else if (error) {
+    alert(error.message);
+    loading.value = false;
   }
 }
 </script>
 <template>
-  <AuthForm v-model="credentials" @submit.prevent="onSubmit">
-    <template v-slot:title>Come on in</template>
-    <template v-slot:subtitle>Please enter your details</template>
-    <template v-slot:submitButton>Sign Up</template>
-    <template v-slot:bottomLink
-      ><router-link to="/signin" class="mb-4 text-sm"
-        >Have an account? <strong>Sign in here!</strong></router-link
-      ></template
+  <div>
+    <h2 class="mb- text-2xl font-bold">Good to have you.</h2>
+    <p class="mb-4 text-sm text-slate-500">
+      We just need some details from you.
+    </p>
+    <form class="flex w-full flex-col items-start" @submit.prevent="onSubmit">
+      <VLabel for="email">Email</VLabel>
+      <VInput
+        required
+        :disabled="loading"
+        class="w-full"
+        name="email"
+        id="email"
+        type="email"
+        placeholder="Enter your email"
+        v-model="credentials.email"
+      />
+      <VLabel for="password">Password</VLabel>
+      <VPasswordInput
+        :disabled="loading"
+        class="mb-4 w-full"
+        name="password"
+        id="password"
+        placeholder="Choose a password"
+        v-model="credentials.password"
+      />
+
+      <VButton
+        :loading="loading"
+        type="submit"
+        class="mb-4 w-full rounded bg-slate-900 py-2 text-sm text-slate-100"
+      >
+        Sign Up
+      </VButton>
+    </form>
+
+    <span class="text-sm">
+      Already registered?
+      <router-link to="/signin" class="font-bold"
+        >Sign in here!</router-link
+      ></span
     >
-    <span class="mb-4 text-sm font-bold">Choose a strong password!</span>
-  </AuthForm>
+  </div>
 </template>

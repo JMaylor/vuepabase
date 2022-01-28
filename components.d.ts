@@ -6,6 +6,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AuthForm: typeof import('./src/components/AuthForm.vue')['default']
     BrandLogo: typeof import('./src/components/images/BrandLogo.vue')['default']
+    VButton: typeof import('./src/components/VButton.vue')['default']
     VInput: typeof import('./src/components/VInput.vue')['default']
     VLabel: typeof import('./src/components/VLabel.vue')['default']
     VPasswordInput: typeof import('./src/components/VPasswordInput.vue')['default']
