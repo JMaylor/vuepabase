@@ -11,5 +11,5 @@ async function signOut() {
   <button @click="signOut" class="rounded bg-teal-700 py-1 px-3 text-white">
     Sign Out
   </button>
-  <pre>{{ supabase.auth }}</pre>
+  <pre>{{ supabase.auth.user() }}</pre>
 </template>
