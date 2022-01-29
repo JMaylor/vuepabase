@@ -1,28 +1,35 @@
 <script lang="ts" setup>
 import { useAuthStore } from "@/stores/auth";
+const router = useRouter();
+const route = useRoute();
+
+/* Parse the route hash into a dictionary so we can pick out the access_token provided */
+const hashDictionary = {} as any;
+// first remove the actual '#' character
+const hash = route.hash.replace("#", "");
+// split hash into key-value pairs
+hash.split("&").forEach((item) => {
+  // split 'key=value' into [key, value]
+  const [key, value] = item.split("=");
+  // add to results
+  hashDictionary[key] = value;
+});
+const resetToken = hashDictionary.access_token;
 
 const password = ref("");
 const loading = ref(false);
-const router = useRouter();
-
 async function onSubmit() {
-  const authStore = useAuthStore();
-  if (!authStore.resetToken) return alert("no reset token provided...");
+  const { supabase } = useAuthStore();
   loading.value = true;
-
-  const { error, data } = await authStore.supabase.auth.api.updateUser(
-    authStore.resetToken,
-    {
-      password: password.value,
-    }
-  );
+  const { error, data } = await supabase.auth.api.updateUser(resetToken, {
+    password: password.value,
+  });
   console.log(error, data);
 
   if (error) {
     alert(error.message);
   } else {
-    authStore.$patch({ resetToken: null });
-    alert('successfully reset password.')
+    alert("successfully reset password.");
     router.push("/");
   }
   loading.value = false;

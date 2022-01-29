@@ -2,19 +2,18 @@
 import { useAuthStore } from "@/stores/auth";
 
 const email = ref("");
-
 const loading = ref(false);
-
 async function onSubmit() {
   loading.value = true;
-
   const { supabase } = useAuthStore();
   const { data, error } = await supabase.auth.api.resetPasswordForEmail(
-    email.value
+    email.value,
+    {
+      redirectTo: `${window.location.origin}/resetpassword`,
+    }
   );
-  console.log(data, error);
   if (data) {
-    alert('please follow the link in your email');
+    alert("please follow the link in your email");
   } else if (error) {
     alert(error.message);
   }

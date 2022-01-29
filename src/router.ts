@@ -37,6 +37,16 @@ const router = createRouter({
           path: "/resetpassword",
           name: "resetPassword",
           component: () => import("@/views/auth/ResetPassword.vue"),
+          beforeEnter: (to) => {
+            // only allow navigation to reset password
+            // if we actually clicked a proper reset password link
+            // which provides the type=recovery hash key
+            if (!to.hash.includes("type=recovery")) {
+              const { supabase } = useAuthStore();
+              if (supabase.auth.user()) return "/";
+              return "/signin";
+            }
+          },
         },
         {
           path: "/:pathMatch(.*)*",
@@ -48,11 +58,17 @@ const router = createRouter({
 
     {
       path: "/",
-      name: "home",
-      component: () => import("@/views/HomeView.vue"),
+      component: () => import("@/layouts/DashboardLayout.vue"),
       meta: {
         requiresAuth: true,
       },
+      children: [
+        {
+          path: "/",
+          name: "home",
+          component: () => import("@/views/HomeView.vue"),
+        },
+      ],
     },
   ],
 });
@@ -64,34 +80,16 @@ supabase.auth.onAuthStateChange((event) => {
 });
 
 router.beforeEach((to) => {
-  const authStore = useAuthStore();
-  if (to.hash.includes("type=recovery") && to.name != "resetPassword") {
-    // parse the hash
-    const hashDictionary = {} as any;
+  const { supabase } = useAuthStore();
 
-    // first remove the actual hash
-    const hash = to.hash.replace("#", "");
-    // split into key,values
-    hash.split("&").forEach((item) => {
-      // split 'key=value' into [key, value]
-      const [key, value] = item.split("=");
-      // add to results
-      hashDictionary[key] = value;
-    });
-
-    authStore.$patch({ resetToken: hashDictionary.access_token });
-    return { name: `resetPassword`, hash: to.hash };
-  }
-  if (to.hash.includes("type=recovery") && to.name == "resetPassword")
-    return true;
-  if (to.meta.requiresAuth && !authStore.supabase.auth.user()) {
+  if (to.meta.requiresAuth && !supabase.auth.user()) {
     return {
       path: "/signin",
       // save the location we were at to come back later
       query: { redirect: to.fullPath },
     };
   }
-  if (to.meta.requiresNoAuth && authStore.supabase.auth.user()) {
+  if (to.meta.requiresNoAuth && supabase.auth.user()) {
     return {
       path: "/",
     };
