@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { Ref } from "vue";
-import { isDarkKey } from "@/main";
+import { isDarkKey } from "@/symbols";
 
 /* modelValue here refers to whether or not to show side nav drawer */
 defineProps<{
