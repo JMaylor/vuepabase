@@ -102,7 +102,7 @@ const navLinks = [
 
 async function signOut() {
   const { error } = await supabase.auth.signOut();
-  if (error) alert(error);
+  if (error) alert(error.message);
 }
 </script>
 
