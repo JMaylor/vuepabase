@@ -37,13 +37,7 @@ async function onSubmit() {
         v-model="email"
       />
 
-      <VButton
-        :loading="loading"
-        type="submit"
-        class="mb-4 w-full rounded bg-slate-900 py-2 text-sm text-slate-100"
-      >
-        Reset
-      </VButton>
+      <VButton :loading="loading" type="submit"> Reset </VButton>
     </form>
 
     <span class="text-sm">

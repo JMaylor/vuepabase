@@ -28,7 +28,7 @@ watch(
 );
 </script>
 <template>
-  <div class="inline-flex items-stretch rounded border focus-within:ring">
+  <div class="mb-4 inline-flex items-stretch rounded border focus-within:ring">
     <VInput
       :modelValue="modelValue"
       @update:model-value="onInput"

@@ -16,6 +16,6 @@ function onInput(event: Event): void {
   <input
     :value="modelValue"
     @input="onInput"
-    class="mb-2 rounded border py-1 px-3 text-slate-900 outline-none transition focus:ring"
+    class="mb-4 rounded border py-1 px-3 text-slate-900 outline-none transition focus:ring"
   />
 </template>
