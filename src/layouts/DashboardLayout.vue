@@ -9,9 +9,6 @@ const route = useRoute();
 watch(route, () => {
   if (!lgAndLarger.value) open.value = false;
 });
-
-// const isDark = useDark();
-// const toggleDark = useToggle(isDark);
 </script>
 
 <template>

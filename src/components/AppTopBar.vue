@@ -24,6 +24,9 @@
 </template>
 
 <script lang="ts" setup>
+import { Ref } from "vue";
+import { isDarkKey } from "@/main";
+
 /* modelValue here refers to whether or not to show side nav drawer */
 defineProps<{
   modelValue: boolean;
@@ -33,6 +36,6 @@ defineEmits<{
   (e: "update:modelValue", value: boolean): void;
 }>();
 
-const isDark = useDark();
+const isDark = inject(isDarkKey) as Ref<boolean>;
 const toggleDark = useToggle(isDark);
 </script>
