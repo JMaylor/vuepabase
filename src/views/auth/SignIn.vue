@@ -39,25 +39,23 @@ async function onSubmit() {
         type="email"
         placeholder="Enter your email"
         v-model="(credentials.email as string)"
+        data-cy="email"
       />
       <VLabel for="password">Password</VLabel>
       <VPasswordInput
         :disabled="loading"
-        class="mb-4 w-full"
+        class="w-full"
         name="password"
         id="password"
         placeholder="Enter your password"
         v-model="(credentials.password as string)"
+        data-cy="password"
       />
       <router-link to="/forgotpassword" class="mb-4 text-sm font-bold"
         >Forgot your password?</router-link
       >
 
-      <VButton
-        :loading="loading"
-        type="submit"
-        class="mb-4 w-full rounded bg-slate-900 py-2 text-sm text-slate-100"
-      >
+      <VButton :loading="loading" type="submit" data-cy="submit">
         Sign In
       </VButton>
     </form>
