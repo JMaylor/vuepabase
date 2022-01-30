@@ -85,8 +85,6 @@ router.beforeEach((to) => {
   if (to.meta.requiresAuth && !supabase.auth.user()) {
     return {
       path: "/signin",
-      // save the location we were at to come back later
-      query: { redirect: to.fullPath },
     };
   }
   if (to.meta.requiresNoAuth && supabase.auth.user()) {
