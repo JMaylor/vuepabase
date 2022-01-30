@@ -28,49 +28,47 @@
           <i-ci-external-link class="ml-2" />
         </a>
         <nav class="flex flex-col space-y-2 pt-4">
-          <!-- <router-link
+          <router-link
             v-for="{ text, to, icon } in navLinks"
             v-wave
             class="nav-button"
             exact-active-class="bg-teal-800 text-zinc-100"
             :to="to"
           >
-            <span class="iconify w-6 h-6 mr-2" :data-icon="icon"></span>
+            <span class="iconify mr-2 h-6 w-6" :data-icon="icon"></span>
             <span>{{ text }}</span>
-          </router-link> -->
+          </router-link>
         </nav>
       </div>
-      <!-- <div class="flex flex-col">
+      <div class="flex flex-col">
         <a
           v-wave
           class="nav-button"
-          href="https://github.com/JMaylor/zephyr-dashboard"
+          href="https://github.com/JMaylor/vue3-supabase-ts-tailwind-dashboard"
           target="_blank"
+          rel="noreferrer noopener"
         >
           <span
-            class="iconify w-6 h-6 mr-2"
+            class="iconify mr-2 h-6 w-6"
             data-icon="heroicons-outline:external-link"
           ></span>
           <span>GitHub</span>
         </a>
-        <router-link
-          v-wave
-          class="nav-button"
-          to="/"
-        >
+        <button @click="signOut" v-wave class="nav-button">
           <span
-            class="iconify w-6 h-6 mr-2"
+            class="iconify mr-2 h-6 w-6"
             data-icon="heroicons-outline:logout"
           ></span>
           <span>Sign Out</span>
-        </router-link>
-      </div> -->
+        </button>
+      </div>
     </div>
   </transition>
 </template>
 
 <script lang="ts" setup>
 import { breakpointsTailwind } from "@vueuse/core";
+import { supabase } from "@/services/supabase";
 
 defineProps({
   modelValue: {
@@ -90,11 +88,11 @@ onClickOutside(navContainer, () => {
 });
 
 const navLinks: any[] = [
-  // {
-  //   text: "Home",
-  //   to: "/dashboard",
-  //   icon: "heroicons-outline:home",
-  // },
+  {
+    text: "Home",
+    to: "/",
+    icon: "heroicons-outline:home",
+  },
   // {
   //   text: "About",
   //   to: "/dashboard/about",
@@ -121,6 +119,11 @@ const navLinks: any[] = [
   //   icon: "heroicons-outline:user",
   // },
 ];
+
+async function signOut() {
+  const { error } = await supabase.auth.signOut();
+  if (error) alert(error);
+}
 </script>
 
 <style scoped>

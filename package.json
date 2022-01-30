@@ -24,7 +24,7 @@
   "devDependencies": {
     "@cypress/vite-dev-server": "^2.2.2",
     "@cypress/vue": "^3.1.0",
-    "@iconify/json": "^1.1.449",
+    "@iconify/json": "^1.1.461",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/autosize": "^4.0.1",
     "@types/node": "^16.11.17",
@@ -47,6 +47,7 @@
     "unplugin-icons": "^0.13.0",
     "unplugin-vue-components": "^0.17.11",
     "vite": "^2.7.7",
+    "vite-plugin-purge-icons": "^0.7.0",
     "vue-tsc": "^0.29.8"
   }
 }

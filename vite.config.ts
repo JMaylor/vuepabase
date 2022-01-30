@@ -6,12 +6,16 @@ import Components from "unplugin-vue-components/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
+import PurgeIcons from "vite-plugin-purge-icons";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     Icons({ compiler: "vue3" }),
+    PurgeIcons({
+      content: ["**/*.html", "**/*.js", "**/*.ts", "**/*.vue"],
+    }),
     Components({
       dts: true,
       resolvers: [IconsResolver()],
