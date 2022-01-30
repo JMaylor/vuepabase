@@ -10,6 +10,8 @@ const password = ref("");
 const nickname = ref(name.value);
 
 const loading = ref(false);
+
+/* Change Password */
 async function changePassword() {
   loading.value = true;
   const { error } = await supabase.auth.update({
@@ -20,6 +22,7 @@ async function changePassword() {
   loading.value = false;
 }
 
+/* Change Nickname */
 async function changeNickname() {
   loading.value = true;
   const { error } = await supabase.auth.update({
@@ -29,7 +32,6 @@ async function changeNickname() {
   else {
     alert("nickname successfully changed");
     name.value = nickname.value;
-    nickname.value = "";
   }
   loading.value = false;
 }
@@ -37,7 +39,7 @@ async function changeNickname() {
 
 <template>
   <h1 class="mb-2 text-3xl font-medium">Profile</h1>
-  <p class="mb-4 text-xl">Hi, {{ nickname }}</p>
+  <p class="mb-4 text-xl">Hi, {{ name }}</p>
 
   <div class="inline-grid grid-cols-1 gap-8 md:grid-cols-2">
     <form
@@ -46,13 +48,14 @@ async function changeNickname() {
     >
       <VLabel for="password">Change your password</VLabel>
       <VPasswordInput
+        :disabled="loading"
         v-model="password"
         class="inline-block"
         name="password"
         id="password"
         placeholder="Choose a new password"
       />
-      <VButton>Change Password</VButton>
+      <VButton :disabled="loading">Change Password</VButton>
     </form>
     <form
       class="inline-flex flex-col space-y-2"
@@ -60,6 +63,7 @@ async function changeNickname() {
     >
       <VLabel for="nickname">Change your nickname</VLabel>
       <VInput
+        :disabled="loading"
         required
         v-model="nickname"
         class="inline-block"
@@ -67,7 +71,7 @@ async function changeNickname() {
         id="nickname"
         placeholder="Choose a new nickname"
       />
-      <VButton>Change Nickname</VButton>
+      <VButton :disabled="loading">Change Nickname</VButton>
     </form>
   </div>
 </template>
