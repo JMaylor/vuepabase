@@ -9,13 +9,13 @@
 
   <!-- nav drawer -->
   <transition
-    enter-from-class="transform -translate-x-full"
-    leave-to-class="transform -translate-x-full"
+    enter-from-class="-translate-x-full"
+    leave-to-class="-translate-x-full"
   >
     <div
       v-if="modelValue"
       ref="navContainer"
-      class="nav-container fixed z-50 flex h-full w-64 flex-col justify-between bg-zinc-900 bg-cover p-4 text-zinc-100 shadow-lg transition-transform dark:shadow-none"
+      class="nav-container fixed z-50 flex h-full max-h-full w-64 flex-col justify-between divide-y overflow-y-auto bg-zinc-900 bg-cover p-4 text-zinc-100 shadow-lg transition-transform dark:shadow-none"
     >
       <div class="divide-y divide-zinc-100">
         <a
@@ -27,7 +27,7 @@
           maylor.io
           <i-ci-external-link class="ml-2" />
         </a>
-        <nav class="flex flex-col space-y-2 pt-4">
+        <nav class="flex flex-col space-y-2 py-4">
           <router-link
             v-for="{ text, to, icon } in navLinks"
             v-wave
@@ -40,7 +40,7 @@
           </router-link>
         </nav>
       </div>
-      <div class="flex flex-col">
+      <div class="flex flex-shrink-0 flex-col">
         <a
           v-wave
           class="nav-button"
@@ -70,54 +70,29 @@
 import { breakpointsTailwind } from "@vueuse/core";
 import { supabase } from "@/services/supabase";
 
-defineProps({
-  modelValue: {
-    type: Boolean,
-    required: true,
-  },
-});
-const emit = defineEmits(["update:modelValue"]);
-const navContainer = ref(null);
+defineProps<{
+  modelValue: boolean;
+}>();
 
-// TODO - switch focus to nav drawer when it is opened with keyboard ?
+const emit = defineEmits<{
+  (e: "update:modelValue", value: boolean): void;
+}>();
 
+/* close the nav whenever clicked outside on small screens */
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const lgAndLarger = breakpoints.greater("lg");
+const navContainer = ref(null);
 onClickOutside(navContainer, () => {
   if (!lgAndLarger.value) emit("update:modelValue", false);
 });
 
-const navLinks: any[] = [
+/* main navigation links for side drawer */
+const navLinks = [
   {
     text: "Home",
     to: "/",
     icon: "heroicons-outline:home",
   },
-  // {
-  //   text: "About",
-  //   to: "/dashboard/about",
-  //   icon: "heroicons-outline:information-circle",
-  // },
-  // {
-  //   text: "Form",
-  //   to: "/dashboard/form",
-  //   icon: "heroicons-outline:clipboard-list",
-  // },
-  // {
-  //   text: "Calendar",
-  //   to: "/dashboard/calendar",
-  //   icon: "heroicons-outline:calendar",
-  // },
-  // {
-  //   text: "Table",
-  //   to: "/dashboard/table",
-  //   icon: "heroicons-outline:table",
-  // },
-  // {
-  //   text: "Profile",
-  //   to: "/dashboard/profile",
-  //   icon: "heroicons-outline:user",
-  // },
 ];
 
 async function signOut() {

@@ -4,10 +4,13 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppFooter: typeof import('./src/components/AppFooter.vue')['default']
+    AppTopBar: typeof import('./src/components/AppTopBar.vue')['default']
     BrandLogo: typeof import('./src/components/images/BrandLogo.vue')['default']
     ICiExternalLink: typeof import('~icons/ci/external-link')['default']
     NavDrawer: typeof import('./src/components/NavDrawer.vue')['default']
     VButton: typeof import('./src/components/VButton.vue')['default']
+    VIconButton: typeof import('./src/components/VIconButton.vue')['default']
     VInput: typeof import('./src/components/VInput.vue')['default']
     VLabel: typeof import('./src/components/VLabel.vue')['default']
     VPasswordInput: typeof import('./src/components/VPasswordInput.vue')['default']
