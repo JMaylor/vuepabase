@@ -93,6 +93,11 @@ const navLinks = [
     to: "/",
     icon: "heroicons-outline:home",
   },
+  {
+    text: "Profile",
+    to: "/profile",
+    icon: "heroicons-outline:user",
+  },
 ];
 
 async function signOut() {

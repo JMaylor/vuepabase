@@ -27,7 +27,7 @@ watch(
 );
 </script>
 <template>
-  <div class="flex items-stretch rounded border focus-within:ring">
+  <div class="inline-flex items-stretch rounded border focus-within:ring">
     <VInput
       @update:model-value="onInput"
       required
