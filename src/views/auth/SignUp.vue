@@ -40,7 +40,7 @@ async function onSubmit() {
         id="email"
         type="email"
         placeholder="Enter your email"
-        v-model="credentials.email"
+        v-model="(credentials.email as string)"
       />
       <VLabel for="password">Password</VLabel>
       <VPasswordInput
@@ -49,16 +49,10 @@ async function onSubmit() {
         name="password"
         id="password"
         placeholder="Choose a password"
-        v-model="credentials.password"
+        v-model="(credentials.password as string)"
       />
 
-      <VButton
-        :loading="loading"
-        type="submit"
-        class="mb-4 w-full rounded bg-slate-900 py-2 text-sm text-slate-100"
-      >
-        Sign Up
-      </VButton>
+      <VButton :loading="loading" type="submit"> Sign Up </VButton>
     </form>
 
     <span class="text-sm">
