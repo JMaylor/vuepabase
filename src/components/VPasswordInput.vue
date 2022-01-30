@@ -9,6 +9,7 @@ const props = defineProps<{
   name?: string;
   id?: string;
   placeholder?: string;
+  modelValue: string;
 }>();
 
 const emit = defineEmits<{
@@ -29,9 +30,10 @@ watch(
 <template>
   <div class="inline-flex items-stretch rounded border focus-within:ring">
     <VInput
+      :modelValue="modelValue"
       @update:model-value="onInput"
       required
-      class="mb-0 rounded-r-none border-0 focus:ring-0"
+      class="mb-0 rounded-r-none border-0 text-slate-900 focus:ring-0"
       :name="name"
       :id="id"
       :placeholder="placeholder"
