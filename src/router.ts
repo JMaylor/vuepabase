@@ -49,6 +49,35 @@ const router = createRouter({
           },
         },
         {
+          path: "/callback",
+          name: "callback",
+          component: () => import("@/views/auth/AuthCallback.vue"),
+          beforeEnter: (to) => {
+            /* Parse the route hash into a dictionary */
+            const hashDictionary = {} as any;
+            // first remove the actual '#' character
+            const hash = to.hash.replace("#", "");
+            // split hash into key-value pairs
+            hash.split("&").forEach((item) => {
+              // split 'key=value' into [key, value]
+              const [key, value] = item.split("=");
+              // add to results
+              hashDictionary[key] = value;
+            });
+
+            if (
+              [
+                "access_token",
+                "expires_in",
+                "provider_token",
+                "refresh_token",
+                "token_type",
+              ].some((key) => !(key in hashDictionary))
+            )
+              return "/";
+          },
+        },
+        {
           path: "/:pathMatch(.*)*",
           name: "NotFound",
           component: () => import("@/views/NotFound.vue"),
@@ -82,6 +111,11 @@ const { supabase } = useAuthStore(pinia);
 supabase.auth.onAuthStateChange((event) => {
   console.log(event);
   if (event == "SIGNED_OUT") return router.push("/signin");
+  if (event == "SIGNED_IN" && router.currentRoute.value.name == "callback") {
+    setTimeout(() => {
+      return router.push({ name: "home" });
+    }, 0);
+  }
 });
 
 router.beforeEach((to) => {

@@ -28,12 +28,12 @@ watch(
 );
 </script>
 <template>
-  <div class="mb-4 inline-flex items-stretch rounded border focus-within:ring">
+  <div class="mb-4 inline-flex items-stretch rounded focus-within:ring">
     <VInput
       :modelValue="modelValue"
       @update:model-value="onInput"
       required
-      class="mb-0 rounded-r-none border-0 text-slate-900 focus:ring-0"
+      class="mb-0 rounded-r-none text-slate-900 focus:ring-0"
       :name="name"
       :id="id"
       :placeholder="placeholder"
@@ -44,7 +44,7 @@ watch(
       type="button"
       :disabled="disabled"
       @click="showPassword = !showPassword"
-      class="w-10 rounded-r bg-white text-slate-500 outline-none focus:text-teal-500"
+      class="rounded-r bg-white text-slate-500 border border-l-0 outline-none focus:text-teal-500"
     >
       <eye-slashed v-if="showPassword" class="h-8 w-8 p-1" />
       <eye-open v-else class="h-8 w-8 p-1" />

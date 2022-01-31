@@ -8,6 +8,7 @@ declare module 'vue' {
     AppTopBar: typeof import('./src/components/AppTopBar.vue')['default']
     BrandLogo: typeof import('./src/components/images/BrandLogo.vue')['default']
     ICiExternalLink: typeof import('~icons/ci/external-link')['default']
+    IMdiGithub: typeof import('~icons/mdi/github')['default']
     NavDrawer: typeof import('./src/components/NavDrawer.vue')['default']
     VButton: typeof import('./src/components/VButton.vue')['default']
     VIconButton: typeof import('./src/components/VIconButton.vue')['default']
