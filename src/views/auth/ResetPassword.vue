@@ -53,7 +53,7 @@ async function onSubmit() {
       <VButton
         :loading="loading"
         type="submit"
-        class="mb-4 w-full rounded bg-slate-900 py-2 text-sm text-slate-100"
+        class="mb-4 w-full rounded py-2 text-sm"
       >
         Reset
       </VButton>
