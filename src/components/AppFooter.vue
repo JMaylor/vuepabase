@@ -1,7 +1,24 @@
 <template>
-  <footer class="text-center px-4 flex-shrink-0">
-    <div class="border-t border-zinc-300 dark:border-zinc-700 py-2">
-      Made with ❤️ by Joe Maylor - 2022
+  <footer class="p-4 text-center">
+    <div>
+      Made with ❤️ by
+      <a
+        href="https://maylor.io"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="text-teal-500 underline"
+        >Joe Maylor</a
+      >
+      - 2022 -
+      <a
+        class="text-teal-500 underline"
+        v-wave
+        href="https://github.com/JMaylor/vuepabase"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <span>GitHub</span>
+      </a>
     </div>
   </footer>
 </template>

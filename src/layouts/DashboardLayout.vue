@@ -23,7 +23,7 @@ onMounted(() => {
       :class="{ 'lg:pl-64': open }"
     >
       <AppTopBar v-model="open" />
-      <main class="flex-grow overflow-auto py-4 px-6">
+      <main class="flex-grow overflow-auto px-4 py-2">
         <router-view />
       </main>
       <AppFooter />

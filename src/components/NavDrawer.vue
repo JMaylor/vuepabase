@@ -15,53 +15,35 @@
     <div
       v-if="modelValue"
       ref="navContainer"
-      class="nav-container fixed z-50 flex h-full max-h-full w-64 flex-col justify-between divide-y overflow-y-auto bg-zinc-900 bg-cover p-4 text-zinc-100 shadow-lg transition-transform dark:shadow-none"
+      class="nav-container fixed z-50 flex h-full max-h-full w-64 flex-col justify-between divide-y overflow-y-auto bg-zinc-900 bg-cover py-1 px-2 text-zinc-100 shadow-lg transition-transform dark:shadow-none"
     >
-      <div class="divide-y divide-zinc-100">
-        <a
-          v-wave
-          href="https://maylor.io"
-          target="_blank"
-          class="nav-button mb-4"
-        >
-          maylor.io
-          <i-ci-external-link class="ml-2" />
-        </a>
-        <nav class="flex flex-col space-y-2 py-4">
-          <router-link
-            v-for="{ text, to, icon } in navLinks"
-            v-wave
-            class="nav-button"
-            exact-active-class="bg-teal-800 text-zinc-100"
-            :to="to"
-          >
-            <span class="iconify mr-2 h-6 w-6" :data-icon="icon"></span>
-            <span>{{ text }}</span>
-          </router-link>
-        </nav>
-      </div>
-      <div class="flex flex-shrink-0 flex-col">
-        <a
+      <nav class="py-2">
+        <span class="nav-button">
+          Vuepabase
+          <i-simple-icons-vuedotjs class="ml-2 h-4 w-4" />
+          <i-simple-icons-supabase class="ml-2 h-4 w-4" />
+        </span>
+      </nav>
+
+      <nav class="flex flex-shrink-0 flex-grow flex-col space-y-2 py-2">
+        <router-link
+          v-for="{ text, to, icon } in navLinks"
           v-wave
           class="nav-button"
-          href="https://github.com/JMaylor/vue3-supabase-ts-tailwind-dashboard"
-          target="_blank"
-          rel="noreferrer noopener"
+          exact-active-class="bg-teal-800 text-zinc-100"
+          :to="to"
         >
-          <span
-            class="iconify mr-2 h-6 w-6"
-            data-icon="heroicons-outline:external-link"
-          ></span>
-          <span>GitHub</span>
-        </a>
-        <button @click="signOut" v-wave class="nav-button">
-          <span
-            class="iconify mr-2 h-6 w-6"
-            data-icon="heroicons-outline:logout"
-          ></span>
-          <span>Sign Out</span>
+          <span class="iconify mr-2 h-4 w-4" :data-icon="icon"></span>
+          <span>{{ text }}</span>
+        </router-link>
+      </nav>
+
+      <nav class="py-2">
+        <button @click="signOut" class="nav-button w-full">
+          <i-carbon-logout class="mr-2 h-4 w-4" />
+          Sign Out
         </button>
-      </div>
+      </nav>
     </div>
   </transition>
 </template>
@@ -113,6 +95,6 @@ async function signOut() {
 }
 
 .nav-button {
-  @apply flex items-center rounded p-4 transition-colors focus:outline-none focus:ring-1 focus:ring-teal-500;
+  @apply flex items-center rounded p-2 text-sm transition-colors focus:outline-none focus:ring-1 focus:ring-teal-500;
 }
 </style>

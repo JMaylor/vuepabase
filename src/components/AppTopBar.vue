@@ -1,23 +1,16 @@
 <template>
   <header
-    class="sticky top-0 z-30 flex items-center justify-between p-4 backdrop-blur"
+    class="sticky top-0 z-30 flex items-center justify-between p-3 shadow"
   >
-    <div class="flex items-center space-x-4">
-      <v-icon-button
-        @click="$emit('update:modelValue', !modelValue)"
-        icon="heroicons-outline:menu"
-      />
+    <div class="flex items-center">
+      <v-icon-button @click="$emit('update:modelValue', !modelValue)">
+        <i-carbon-menu class="h-6 w-6" />
+      </v-icon-button>
     </div>
     <div class="flex items-center space-x-4">
       <v-icon-button @click="toggleDark()">
-        <span
-          class="iconify h-full w-full p-2 dark:hidden"
-          data-icon="heroicons-outline:sun"
-        ></span>
-        <span
-          class="iconify hidden h-full w-full p-2 dark:block"
-          data-icon="heroicons-outline:moon"
-        ></span>
+        <i-carbon-sun class="h-6 w-6 dark:hidden" />
+        <i-carbon-moon class="hidden h-6 w-6 dark:block" />
       </v-icon-button>
     </div>
   </header>
