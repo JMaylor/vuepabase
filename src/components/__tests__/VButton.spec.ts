@@ -1,10 +1,12 @@
-import { mount } from "@cypress/vue";
+import { mount } from "@vue/test-utils";
+import { describe, it, expect } from "vitest";
+
 import VButton from "../VButton.vue";
 
 describe("VButton", () => {
   it("renders some text", () => {
     const text = "Test Button";
-    mount(VButton, {
+    const wrapper = mount(VButton, {
       slots: {
         default: {
           render: () => "Test Button",
@@ -12,11 +14,13 @@ describe("VButton", () => {
       },
     });
 
-    cy.get("button").should("contain", text);
+    const button = wrapper.get("button");
+    expect(button.text()).toContain(text);
   });
 
   it("renders loading icon", () => {
-    mount(VButton, { props: { loading: true } });
-    cy.get("svg").should("exist");
+    const wrapper = mount(VButton, { props: { loading: true } });
+    const svg = wrapper.get("svg");
+    expect(svg);
   });
 });
