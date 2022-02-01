@@ -16,7 +16,5 @@ onMounted(() => {
 });
 </script>
 <template>
-  <span class="self-center text-center text-2xl font-medium"
-    >Logging in...</span
-  >
+  <LoadingIcon class="mx-auto w-16" />
 </template>

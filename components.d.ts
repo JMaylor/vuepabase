@@ -14,6 +14,7 @@ declare module 'vue' {
     IMdiGithub: typeof import('~icons/mdi/github')['default']
     ISimpleIconsSupabase: typeof import('~icons/simple-icons/supabase')['default']
     ISimpleIconsVuedotjs: typeof import('~icons/simple-icons/vuedotjs')['default']
+    LoadingIcon: typeof import('./src/components/LoadingIcon.vue')['default']
     NavDrawer: typeof import('./src/components/NavDrawer.vue')['default']
     VButton: typeof import('./src/components/VButton.vue')['default']
     VIconButton: typeof import('./src/components/VIconButton.vue')['default']
