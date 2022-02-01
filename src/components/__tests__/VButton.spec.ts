@@ -9,7 +9,7 @@ describe("VButton", () => {
     const wrapper = mount(VButton, {
       slots: {
         default: {
-          render: () => "Test Button",
+          render: () => text,
         },
       },
     });
