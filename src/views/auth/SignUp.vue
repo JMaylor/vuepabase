@@ -10,19 +10,36 @@ const credentials: Ref<UserCredentials> = ref({
 
 const router = useRouter();
 
-const loading = ref(false);
-
+const emailLoading = ref(false);
 async function onSubmit() {
-  loading.value = true;
-
+  emailLoading.value = true;
   const { supabase } = useAuthStore();
   const { user, error } = await supabase.auth.signUp(credentials.value);
   if (user) router.push("/");
   else if (error) {
     alert(error.message);
-    loading.value = false;
+    emailLoading.value = false;
   }
 }
+
+const gitHubLoading = ref(false);
+async function signInWithGitHub() {
+  gitHubLoading.value = true;
+  const { supabase } = useAuthStore();
+  const { user, error } = await supabase.auth.signIn(
+    { provider: "github" },
+    {
+      redirectTo: `${window.location.origin}/callback`,
+    }
+  );
+  if (user) router.push("/");
+  else if (error) {
+    alert(error.message);
+    gitHubLoading.value = false;
+  }
+}
+
+const loading = computed(() => gitHubLoading.value || emailLoading.value);
 </script>
 <template>
   <div>
@@ -54,6 +71,15 @@ async function onSubmit() {
 
       <VButton :loading="loading" type="submit"> Sign Up </VButton>
     </form>
+    <VButton
+      :loading="gitHubLoading"
+      :disabled="loading"
+      type="button"
+      class="flex items-center justify-center"
+      @click="signInWithGitHub"
+    >
+      <span>Sign Up With GitHub</span><i-mdi-github class="ml-1" />
+    </VButton>
 
     <span class="text-sm">
       Already registered?
