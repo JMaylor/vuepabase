@@ -6,6 +6,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./src/components/AppFooter.vue')['default']
     AppTopBar: typeof import('./src/components/AppTopBar.vue')['default']
+    AuthForm: typeof import('./src/components/AuthForm.vue')['default']
     BrandLogo: typeof import('./src/components/images/BrandLogo.vue')['default']
     ICarbonLogout: typeof import('~icons/carbon/logout')['default']
     ICarbonMenu: typeof import('~icons/carbon/menu')['default']
