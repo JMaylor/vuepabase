@@ -3,7 +3,7 @@
     <div>
       Made with ❤️ by
       <a
-        href="https://maylor.io"
+        href="https://github.com/JMaylor"
         target="_blank"
         rel="noreferrer noopener"
         class="text-teal-500 underline"
