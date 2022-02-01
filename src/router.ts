@@ -111,10 +111,15 @@ const { supabase } = useAuthStore(pinia);
 supabase.auth.onAuthStateChange((event) => {
   console.log(event);
   if (event == "SIGNED_OUT") return router.push("/signin");
-  if (event == "SIGNED_IN" && router.currentRoute.value.name == "callback") {
-    setTimeout(() => {
-      return router.push({ name: "home" });
-    }, 0);
+  if (event == "SIGNED_IN") {
+    const routeName = router.currentRoute.value.name;
+    console.log("routeName", routeName);
+
+    if (routeName == "callback") {
+      setTimeout(() => {
+        return router.push({ name: "home" });
+      }, 0);
+    }
   }
 });
 
