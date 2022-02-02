@@ -49,7 +49,65 @@ async function gitHubAuth() {
   }
 }
 
-const loading = computed(() => gitHubLoading.value || emailLoading.value);
+const googleLoading = ref(false);
+async function googleAuth() {
+  googleLoading.value = true;
+  const { supabase } = useAuthStore();
+  const { user, error } = await supabase.auth.signIn(
+    { provider: "google" },
+    {
+      redirectTo: `${window.location.origin}/callback`,
+    }
+  );
+  if (user) router.push("/");
+  else if (error) {
+    alert(error.message);
+    googleLoading.value = false;
+  }
+}
+
+const twitterLoading = ref(false);
+async function twitterAuth() {
+  twitterLoading.value = true;
+  const { supabase } = useAuthStore();
+  const { user, error } = await supabase.auth.signIn(
+    { provider: "twitter" },
+    {
+      redirectTo: `${window.location.origin}/callback`,
+    }
+  );
+  if (user) router.push("/");
+  else if (error) {
+    alert(error.message);
+    twitterLoading.value = false;
+  }
+}
+
+const facebookLoading = ref(false);
+async function facebookAuth() {
+  facebookLoading.value = true;
+  const { supabase } = useAuthStore();
+  const { user, error } = await supabase.auth.signIn(
+    { provider: "facebook" },
+    {
+      redirectTo: `${window.location.origin}/callback`,
+    }
+  );
+  if (user) router.push("/");
+  else if (error) {
+    alert(error.message);
+    facebookLoading.value = false;
+  }
+}
+
+const loading = computed(
+  () =>
+    gitHubLoading.value ||
+    emailLoading.value ||
+    googleLoading.value ||
+    twitterLoading.value ||
+    facebookLoading.value
+);
 </script>
 <template>
   <div>
@@ -81,19 +139,59 @@ const loading = computed(() => gitHubLoading.value || emailLoading.value);
         v-model="(credentials.password as string)"
       />
 
-      <VButton :loading="emailLoading" :disabled="loading" type="submit">{{
-        signUp ? "Sign Up" : "Sign In"
-      }}</VButton>
+      <router-link
+        v-if="!signUp"
+        to="/forgotpassword"
+        class="mb-4 text-sm font-bold"
+        >Forgot your password?</router-link
+      >
+
+      <VButton
+        :loading="emailLoading"
+        :disabled="loading"
+        type="submit"
+        class="bg-teal-700"
+        >{{ signUp ? "Sign Up" : "Sign In" }}</VButton
+      >
     </form>
-    <VButton
-      :loading="gitHubLoading"
-      :disabled="loading"
-      type="button"
-      class="flex items-center justify-center"
-      @click="gitHubAuth"
-    >
-      <span>Sign In With GitHub</span><i-mdi-github class="ml-1" />
-    </VButton>
+    <div class="flex space-x-2">
+      <VButton
+        :loading="gitHubLoading"
+        :disabled="loading"
+        type="button"
+        class="flex items-center justify-center bg-black"
+        @click="gitHubAuth"
+      >
+        <i-mdi-github class="h-5 w-5" />
+      </VButton>
+      <VButton
+        :loading="googleLoading"
+        :disabled="loading"
+        type="button"
+        class="flex items-center justify-center bg-[#EA4335]"
+        @click="googleAuth"
+      >
+        <i-mdi-google class="h-5 w-5" />
+      </VButton>
+      <VButton
+        :loading="twitterLoading"
+        :disabled="loading"
+        type="button"
+        class="flex items-center justify-center bg-[#1DA1F2]"
+        @click="twitterAuth"
+      >
+        <i-mdi-twitter class="h-5 w-5" />
+      </VButton>
+      <VButton
+        :loading="facebookLoading"
+        :disabled="loading"
+        type="button"
+        class="flex items-center justify-center bg-[#425F9C]"
+        @click="facebookAuth"
+      >
+        <i-mdi-facebook class="h-5 w-5" />
+      </VButton>
+    </div>
 
     <slot name="actions" />
   </div>

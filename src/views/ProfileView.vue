@@ -55,7 +55,7 @@ async function changeNickname() {
         id="password"
         placeholder="Choose a new password"
       />
-      <VButton :disabled="loading">Change Password</VButton>
+      <VButton :disabled="loading" class="bg-teal-700">Change Password</VButton>
     </form>
     <form
       class="inline-flex flex-col space-y-2"
@@ -71,7 +71,7 @@ async function changeNickname() {
         id="nickname"
         placeholder="Choose a new nickname"
       />
-      <VButton :disabled="loading">Change Nickname</VButton>
+      <VButton :disabled="loading" class="bg-teal-700">Change Nickname</VButton>
     </form>
   </div>
 </template>
