@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
-    "prebuild": "test \"$CI\" = true && npx pnpm install -r --store=node_modules/.pnpm-store || echo skipping pnpm install",
+    "prebuild": "[[ $CI = true ]] && npx pnpm@7 install -r --store=node_modules/.pnpm-store || echo skiping pnpm install",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 5050 --host",
     "test:unit": "vitest --environment jsdom",
