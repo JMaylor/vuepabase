@@ -11,7 +11,9 @@ node_modules
 .DS_Store
 dist
 dist-ssr
+coverage
 *.local
+.env
 
 /cypress/videos/
 /cypress/screenshots/
@@ -25,5 +27,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-.env

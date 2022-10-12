@@ -1,12 +1,6 @@
-<script lang="ts" setup>
-import LoadingIcon from "~icons/ant-design/loading-outlined";
-defineProps<{
-  loading?: boolean;
-}>();
-</script>
+<script lang="ts" setup></script>
 <template>
-  <button class="mb-4 w-full rounded py-2 text-sm text-slate-50">
-    <slot v-if="!loading" />
-    <LoadingIcon v-else class="mx-auto h-5 animate-spin" data-cy="loading" />
+  <button class="rounded inline-flex items-center text-center border px-3 py-1">
+    <slot />
   </button>
 </template>
